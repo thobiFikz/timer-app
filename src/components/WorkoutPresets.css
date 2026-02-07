@@ -1,0 +1,109 @@
+.workout-presets {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.workout-presets h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.preset-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.preset-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.preset-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preset-header h3 {
+  font-size: 1.3rem;
+  color: #667eea;
+  flex: 1;
+  margin-right: 0.5rem;
+  word-break: break-word;
+}
+
+.delete-button {
+  background: rgba(255, 59, 59, 0.2);
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  background: rgba(255, 59, 59, 0.4);
+  transform: scale(1.1);
+}
+
+.preset-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.preset-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.detail-icon {
+  font-size: 1.2rem;
+}
+
+.load-button {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.load-button:hover {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .workout-presets {
+    padding: 1.5rem;
+  }
+
+  .presets-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,72 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-header p {
+  color: #aaa;
+  font-size: 1.1rem;
+}
+
+.app-content {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.start-button-container {
+  padding: 2rem 1rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.start-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1.5rem 4rem;
+  border-radius: 50px;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+}
+
+.start-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .start-button {
+    font-size: 1.3rem;
+    padding: 1.2rem 3rem;
+  }
+}

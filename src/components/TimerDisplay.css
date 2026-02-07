@@ -1,0 +1,242 @@
+.timer-display {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.timer-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.phase-indicator {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5rem 2rem;
+  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.paused-indicator {
+  font-size: 1.2rem;
+  color: #fbbf24;
+  padding: 0.5rem 1rem;
+  background: rgba(251, 191, 36, 0.2);
+  border-radius: 10px;
+}
+
+.timer-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.timer-circle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+  stroke-linecap: round;
+}
+
+.timer-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.time-remaining {
+  font-size: 5rem;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.timer-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+}
+
+.info-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.progress-bar-container {
+  margin-bottom: 2rem;
+}
+
+.progress-bar-label {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  transition: width 0.5s ease, background-color 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.timer-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.control-button {
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.pause-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.pause-button:hover {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  transform: translateY(-2px);
+}
+
+.reset-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.reset-button:hover {
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .timer-display {
+    padding: 1.5rem;
+  }
+
+  .phase-indicator {
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .timer-circle {
+    width: 250px;
+    height: 250px;
+  }
+
+  .progress-ring {
+    width: 250px;
+    height: 250px;
+  }
+
+  .progress-ring circle {
+    r: 115;
+    cx: 125;
+    cy: 125;
+  }
+
+  .time-remaining {
+    font-size: 3.5rem;
+  }
+
+  .timer-info {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .control-button {
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-circle {
+    width: 200px;
+    height: 200px;
+  }
+
+  .progress-ring {
+    width: 200px;
+    height: 200px;
+  }
+
+  .progress-ring circle {
+    r: 90;
+    cx: 100;
+    cy: 100;
+  }
+
+  .time-remaining {
+    font-size: 2.8rem;
+  }
+}
