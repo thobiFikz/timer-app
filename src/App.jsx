@@ -30,7 +30,8 @@ function App() {
     inRestBetweenCircuits: false,
   });
 
-  const audioRef = useRef(null);
+  // Use a persistent AudioContext for mobile compatibility
+  const audioContextRef = useRef(null);
   const timerRef = useRef(null);
 
   // Save workouts to localStorage
@@ -45,7 +46,6 @@ function App() {
       if (timerRef.current) clearInterval(timerRef.current);
       return;
     }
-
 
     timerRef.current = setInterval(() => {
       setTimerState((prev) => {
@@ -187,9 +187,17 @@ function App() {
     return current;
   };
 
+
+  const getAudioContext = () => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContextRef.current;
+  };
+
   const playSound = () => {
-    // Create beep sound for interval end
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    // Use persistent AudioContext for mobile
+    const audioContext = getAudioContext();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     oscillator.connect(gainNode);
@@ -204,7 +212,7 @@ function App() {
 
   // Beep for countdown (last 5 seconds)
   const playCountdownBeep = () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioContext = getAudioContext();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
     oscillator.connect(gainNode);
@@ -218,22 +226,17 @@ function App() {
   };
 
   const playCompletionSound = () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
+    const audioContext = getAudioContext();
     // Play three ascending beeps
     [0, 0.15, 0.3].forEach((delay, index) => {
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
-      
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
-      
       oscillator.frequency.value = 600 + (index * 200);
       oscillator.type = 'sine';
-      
       gainNode.gain.setValueAtTime(0.3, audioContext.currentTime + delay);
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + delay + 0.2);
-      
       oscillator.start(audioContext.currentTime + delay);
       oscillator.stop(audioContext.currentTime + delay + 0.2);
     });
@@ -241,6 +244,12 @@ function App() {
 
 
   const handleStart = () => {
+    // On first user interaction, unlock AudioContext for mobile
+    if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
+      audioContextRef.current.resume();
+    } else if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
     const intervals = getIntervals();
     if (!isTimerActive) {
       setTimerState({
