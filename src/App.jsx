@@ -46,9 +46,14 @@ function App() {
       return;
     }
 
+
     timerRef.current = setInterval(() => {
       setTimerState((prev) => {
         const newTimeRemaining = prev.timeRemaining - 1;
+        // Beep for last 5 seconds
+        if (newTimeRemaining > 0 && newTimeRemaining <= 5) {
+          playCountdownBeep();
+        }
         if (newTimeRemaining <= 0) {
           playSound();
           return getNextInterval(prev);
@@ -183,22 +188,33 @@ function App() {
   };
 
   const playSound = () => {
-    // Create beep sound
+    // Create beep sound for interval end
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = 800;
+    oscillator.frequency.value = 1200;
     oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-    
+    gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
     oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.3);
+    oscillator.stop(audioContext.currentTime + 0.25);
+  };
+
+  // Beep for countdown (last 5 seconds)
+  const playCountdownBeep = () => {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    oscillator.frequency.value = 800;
+    oscillator.type = 'square';
+    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.15);
   };
 
   const playCompletionSound = () => {
